@@ -1674,7 +1674,7 @@ DllCall("SetWindowLongPtr", "Ptr", hwnd, "Int", -20, "Ptr", DllCall("GetWindowLo
 }
 }
 
-global KillTask := 0, loopamount := 2, stopallcoderunning := 0, File1 := "CordsSaveForAutoAppraisal.txt", File2 := "MutationSaveForAutoAppraisal.txt", YHalf := "", XHalf := "", HighlightStatus := 0
+global KillTask := 0, loopamount := 2, File1 := "CordsSaveForAutoAppraisal.txt", File2 := "MutationSaveForAutoAppraisal.txt", YHalf := "", XHalf := "", HighlightStatus := 0
 if !(fileexist(File1)) {
 	SetOcrRange
 	FileAppend
@@ -1734,7 +1734,7 @@ global
 $^q::{
 global
 	MouseGetPos(&clickX ,&clickY)
-	stopallcoderunning := 0, KillTask := 0
+	KillTask := 0
 	sumvar()
 	if (XHalf or YHalf) {
 		if (sumallvar >= 1) {
@@ -1755,9 +1755,9 @@ fishgui
 
 *alt::{
 global
-	if (stopallcoderunning == 0) {
-		stopallcoderunning := 1
-	}
+	Highlight()
+	msgbox "Auto Appraisal have been forcefully stopped.", "Stopped", "0x40040"
+	settimer NormalRun, 0
 }
 
 f1::exitapp
@@ -1826,12 +1826,6 @@ global
 	return
 	}
 	
-	if (stopallcoderunning == 1) {
-	msgbox "Auto Appraisal have been forcefully stopped.", "Stopped", "0x40040"
-	Highlight()
-	settimer NormalRun, 0
-	return
-	}
 	if (AppraiseAnywhereOption.value == 0) {
 	ClickTheButton()
 	}else{
@@ -2014,20 +2008,27 @@ send "{2}"
 sleep 15
 }
 send "{``}"
-sleep 150
-click "965 801"
 sleep 300
+if (Pixelsearch(&template, &template, 939, 792, 985, 811, 0xA7FE94, 2)) {
+click "961 800"
+sleep 200
+}
 mousemove(XHalf, YHalf)
-sleep 25
+sleep 50
 send "{LButton down}"
 sleep 50
 send "{LButton up}"
-sleep 200
+sleep 300
 click "686 596"
+timeout := 0
 loop {
 if (pixelsearch(&template, &template, 894, 804, 894, 804, 0xD43D00, 1) and Pixelsearch(&template, &template, 1008, 800, 1008, 800, 0xA8FF95, 5)) {
 break
 }
+if (timeout >= 100) {
+break
+}
+timeout++
 sleep 25
 }
 click "1036 805"
@@ -2104,7 +2105,7 @@ global
 	AppraiseAnywhereOption.OnEvent("Click", sleepdelayupdate)
 	thegui.SetFont("s11 cwhite", "Tahoma")
 	thegui.SetFont("s13 cwhite underline w800", "Tahoma")
-	thegui.Add("Text", "x" otherstarting+10 " y10 w200", "Auto Appraisal V6")
+	thegui.Add("Text", "x" otherstarting+3 " y10 w200", "Auto Appraisal V6.9")
 	thegui.SetFont("s12 cwhite w800 norm q2", "Tahoma")
 	thegui.Add("Text", "x" otherstarting+35 " y30 w200", "Made by lolzzn")
 	thegui.SetFont("S10 Ce0f9ff W2", "Tahoma")
@@ -2124,7 +2125,7 @@ global
 	retakeboxsettings := thegui.add("button", "x" otherstarting " y270 w165", "Retake Box Settings")
 	retakeboxsettings.OnEvent("Click", takeocrbox)
 
-	thegui.Title := "Auto Appraisal v6"
+	thegui.Title := "Auto Appraisal v6.9"
 	thegui.OnEvent("Close", (*) => exitapp())
 }
 
