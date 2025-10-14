@@ -1,4 +1,4 @@
-﻿#Requires AutoHotkey v2
+#Requires AutoHotkey v2
 
 /**
  * OCR library: a wrapper for the the UWP Windows.Media.Ocr library.
@@ -2024,7 +2024,12 @@ sleep 50
 send "{LButton up}"
 sleep 200
 click "686 596"
-sleep 300
+loop {
+if (pixelsearch(&template, &template, 894, 804, 894, 804, 0xD43D00, 1) and Pixelsearch(&template, &template, 1008, 800, 1008, 800, 0xA8FF95, 5)) {
+break
+}
+sleep 25
+}
 click "1036 805"
 sleep 300
 send "{``}"
