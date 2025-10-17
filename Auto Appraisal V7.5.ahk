@@ -1,4 +1,4 @@
-﻿#Requires AutoHotkey v2
+#Requires AutoHotkey v2
 
 /**
  * OCR library: a wrapper for the the UWP Windows.Media.Ocr library.
@@ -1027,8 +1027,8 @@ class OCR {
 			A_Clipboard := InstallEnglishUSCommand
 			
 			msgbox("I have put the command `"" InstallEnglishUSCommand "`" in your clipboard.`nPaste it on the terminal.`n`n(Press `"Ctrl + V`" on your keyboard while your on the terminal and press `"Enter`"", "Guide", "0x40030")
-			msgbox("That should be all, try restarting the macro`n`n(or just press okay it will refresh it)", "Guide", "0x40000")
-			reload
+			msgbox("That should be all, wait for the download to finish and restart the macro after that", "Guide", "0x40000")
+			exitapp
 		}
 		this.OcrEngine := OcrEngine, this.CurrentLanguage := lang
     }
@@ -2115,7 +2115,7 @@ loop {
 if (pixelsearch(&actuallyusefulyellowone, &actuallyusefulyellowone2, clickX-theclickxbuffer, clickY-theclickybuffer, clickX+theclickxbuffer, clickY+theclickybuffer, 0xFFF4B3, tolerance2332432) and pixelsearch(&template, &template, clickX-theclickxbuffer, clickY-theclickybuffer, clickX+theclickxbuffer, clickY+theclickybuffer, 0xECECEC, tolerance2332432)) {
 break
 }
-if (timeout >= 150) {
+if (timeout >= 75) {
 break
 }
 if (IsStoppingNoYes == 0) {
@@ -2131,7 +2131,7 @@ loop {
 if (pixelsearch(&actuallyusefulyellowone, &actuallyusefulyellowone2, clickX-theclickxbuffer, clickY-theclickybuffer, clickX+theclickxbuffer, clickY+theclickybuffer, 0xFFF4B3, tolerance2332432) and pixelsearch(&template, &template, clickX-theclickxbuffer, clickY-theclickybuffer, clickX+theclickxbuffer, clickY+theclickybuffer, 0xECECEC, tolerance2332432)) {
 break
 }
-if (timeout >= 150) {
+if (timeout >= 75) {
 break
 }
 if (IsStoppingNoYes == 0) {
