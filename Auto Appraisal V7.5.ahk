@@ -1015,19 +1015,11 @@ class OCR {
 			if (OcrInstallationGuide == "No") {
 				exitapp
 			}
-			try {
-				Run "*RunAs powershell.exe -NoExit -Command Get-WindowsCapability -Online | Where-Object { $_.Name -Like '*en-US*' }"
-			}catch as e{
-				msgbox("Run it as administrator", "Permission Error", "0x40000")
-				exitapp
-			}
-			msgbox("Do you see `"OCR`" on the screen as `"uninstalled?`"`nif yes, continue, if not and it's still showing this tutorial`nmessage lolzzn or something", "Guide", "0x40040")
-			
-			InstallEnglishUSCommand := "Add-WindowsCapability -Online -Name Language.OCR~~~en-US~0.0.1.0"
-			A_Clipboard := InstallEnglishUSCommand
-			
-			msgbox("I have put the command `"" InstallEnglishUSCommand "`" in your clipboard.`nPaste it on the terminal.`n`n(Press `"Ctrl + V`" on your keyboard while your on the terminal and press `"Enter`"", "Guide", "0x40030")
-			msgbox("That should be all, wait for the download to finish and restart the macro after that", "Guide", "0x40000")
+			run "ms-settings:regionlanguage"
+			msgbox("Press something that says `"Add Language`", It's usually a button with blue background`n`nPress `"Ok`" to Continue", "Guide", "0x40040")
+			msgbox("Search for `"English (United States)`" at the searchbar.`n`nPress `"Ok`" to Continue", "Guide", "0x40040")
+			msgbox("Press `"Next`", Enable all of them and then click install`n`nPress `"Ok`" to Continue", "Guide", "0x40040")
+			msgbox("That should be all, wait for the download to finish and run the macro again.", "Guide", "0x40040")
 			exitapp
 		}
 		this.OcrEngine := OcrEngine, this.CurrentLanguage := lang
