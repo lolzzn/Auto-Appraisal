@@ -2145,7 +2145,7 @@ loop 2 {
 send "{2}"
 sleep 15
 }
-send "{``}"
+send "{g}"
 sleep 300
 if (Pixelsearch(&template, &template, thenofishconfirmationx-40, thenofishconfirmationy-20, thenofishconfirmationx+40, thenofishconfirmationy+20, 0xA8FF95, tolerance2332432)) {
 click thenofishconfirmationx, thenofishconfirmationy
@@ -2174,7 +2174,7 @@ sleep 25
 }
 click theyesclickx, theyesclicky
 sleep 300
-send "{``}"
+send "{g}"
 send "{2}"
 sleep 400
 }
